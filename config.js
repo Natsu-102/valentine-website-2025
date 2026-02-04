@@ -1,73 +1,85 @@
-// Initialize configuration
-const config = window.VALENTINE_CONFIG;
+// ============================================
+// 💝 CUSTOMIZE YOUR VALENTINE'S WEBSITE HERE 💝
+// ============================================
 
-// 🔥 NAME IMMER ERZWINGEN (überschreibt Jade komplett)
-config.valentineName = "Leonie(BabyGirl)";
+const CONFIG = {
+    // Your Valentine's name that will appear in the title
+    // Example: "Jade", "Sarah", "Mike"
+    valentineName: "Leonie(BabyGirl)",
 
-// Validate configuration
-function validateConfig() {
-    const warnings = [];
+    // The title that appears in the browser tab
+    // You can use emojis! 💝 💖 💗 💓 💞 💕
+    pageTitle: "Will You Be My Valentine? 💝",
 
-    // Validate colors
-    const isValidHex = (hex) => /^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/.test(hex);
-    Object.entries(config.colors).forEach(([key, value]) => {
-        if (!isValidHex(value)) {
-            warnings.push(`Invalid color for ${key}! Using default.`);
-            config.colors[key] = getDefaultColor(key);
+    // Floating emojis that appear in the background
+    // Find more emojis at: https://emojipedia.org
+    floatingEmojis: {
+        hearts: ['❤️', '💖', '💝', '💗', '💓'],  // Heart emojis
+        bears: ['🧸', '🐻']                       // Cute bear emojis
+    },
+
+    // Questions and answers
+    // Customize each question and its possible responses
+    questions: {
+        first: {
+            text: "Do you like me?",
+            yesBtn: "Yes",
+            noBtn: "No",
+            secretAnswer: "I don't like you, I love you! ❤️"
+        },
+        second: {
+            text: "How much do you love me?",
+            startText: "This much!",
+            nextBtn: "Next ❤️"
+        },
+        third: {
+            text: "Will you be my Valentine on February 14th, 2025? 🌹",
+            yesBtn: "Yes!",
+            noBtn: "No"
         }
-    });
+    },
 
-    // Validate animation values
-    if (parseFloat(config.animations.floatDuration) < 5) {
-        warnings.push("Float duration too short! Setting to 5s minimum.");
-        config.animations.floatDuration = "5s";
-    }
+    // Love meter messages
+    loveMessages: {
+        extreme: "WOOOOW You love me that much?? 🥰🚀💝",
+        high: "To infinity and beyond! 🚀💝",
+        normal: "And beyond! 🥰"
+    },
 
-    if (config.animations.heartExplosionSize < 1 || config.animations.heartExplosionSize > 3) {
-        warnings.push("Heart explosion size should be between 1 and 3! Using default.");
-        config.animations.heartExplosionSize = 1.5;
-    }
+    // Messages that appear after they say "Yes!"
+    celebration: {
+        title: "Yay! I'm the luckiest person in the world! 🎉💝💖💝💓",
+        message: "Now come get your gift, a big warm hug and a huge kiss!",
+        emojis: "🎁💖🤗💝💋❤️💕"
+    },
 
-    if (warnings.length > 0) {
-        console.warn("⚠️ Configuration Warnings:");
-        warnings.forEach(warning => console.warn("- " + warning));
-    }
-}
-
-// Default color values
-function getDefaultColor(key) {
-    return {
+    // Color scheme for the website
+    colors: {
         backgroundStart: "#ffafbd",
         backgroundEnd: "#ffc3a0",
         buttonBackground: "#ff6b6b",
         buttonHover: "#ff8787",
         textColor: "#ff4757"
-    }[key];
-}
+    },
 
-// Set page title
-document.title = config.pageTitle;
+    // Animation settings
+    animations: {
+        floatDuration: "15s",
+        floatDistance: "50px",
+        bounceSpeed: "0.5s",
+        heartExplosionSize: 1.5
+    },
 
-// Initialize the page content when DOM is loaded
-window.addEventListener('DOMContentLoaded', () => {
-    validateConfig();
+    // Background Music (Optional)
+    music: {
+        enabled: true,
+        autoplay: true,
+        musicUrl: "https://res.cloudinary.com/dncywqfpb/video/upload/v1738399057/music_qrhjvy.mp3",
+        startText: "🎵 Play Music",
+        stopText: "🔇 Stop Music",
+        volume: 0.5
+    }
+};
 
-    // ✅ HIER WIRD GARANTIERT NUR LEONIE ANGEZEIGT
-    document.getElementById('valentineTitle').textContent = "Leonie(BabyGirl)";
-    
-    document.getElementById('question1Text').textContent = config.questions.first.text;
-    document.getElementById('yesBtn1').textContent = config.questions.first.yesBtn;
-    document.getElementById('noBtn1').textContent = config.questions.first.noBtn;
-    document.getElementById('secretAnswerBtn').textContent = config.questions.first.secretAnswer;
-    
-    document.getElementById('question2Text').textContent = config.questions.second.text;
-    document.getElementById('startText').textContent = config.questions.second.startText;
-    document.getElementById('nextBtn').textContent = config.questions.second.nextBtn;
-    
-    document.getElementById('question3Text').textContent = config.questions.third.text;
-    document.getElementById('yesBtn3').textContent = config.questions.third.yesBtn;
-    document.getElementById('noBtn3').textContent = config.questions.third.noBtn;
-
-    createFloatingElements();
-    setupMusicPlayer();
-});
+// Don't modify anything below this line unless you know what you're doing
+window.VALENTINE_CONFIG = CONFIG;
