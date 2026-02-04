@@ -8,7 +8,7 @@ function validateConfig() {
     // Check required fields
     if (!config.valentineName) {
         warnings.push("Valentine's name is not set! Using default.");
-        config.valentineName = "My Love";
+        config.valentineName = "Leonie(BabyGirl)";
     }
 
     // Validate colors
@@ -58,8 +58,8 @@ window.addEventListener('DOMContentLoaded', () => {
     // Validate configuration first
     validateConfig();
 
-    // Set texts from config
-    document.getElementById('valentineTitle').textContent = `${config.valentineName}, my love...`;
+    // ✅ TITLE – NUR DER NAME (kein "my love")
+    document.getElementById('valentineTitle').textContent = `${config.valentineName}`;
     
     // Set first question texts
     document.getElementById('question1Text').textContent = config.questions.first.text;
@@ -151,7 +151,6 @@ loveMeter.addEventListener('input', () => {
         loveMeter.style.width = `calc(100% + ${extraWidth}px)`;
         loveMeter.style.transition = 'width 0.3s';
         
-        // Show different messages based on the value
         if (value >= 5000) {
             extraLove.classList.add('super-love');
             extraLove.textContent = config.loveMessages.extreme;
@@ -179,12 +178,10 @@ function celebrate() {
     const celebration = document.getElementById('celebration');
     celebration.classList.remove('hidden');
     
-    // Set celebration messages
     document.getElementById('celebrationTitle').textContent = config.celebration.title;
     document.getElementById('celebrationMessage').textContent = config.celebration.message;
     document.getElementById('celebrationEmojis').textContent = config.celebration.emojis;
     
-    // Create heart explosion effect
     createHeartExplosion();
 }
 
@@ -192,7 +189,9 @@ function celebrate() {
 function createHeartExplosion() {
     for (let i = 0; i < 50; i++) {
         const heart = document.createElement('div');
-        const randomHeart = config.floatingEmojis.hearts[Math.floor(Math.random() * config.floatingEmojis.hearts.length)];
+        const randomHeart = config.floatingEmojis.hearts[
+            Math.floor(Math.random() * config.floatingEmojis.hearts.length)
+        ];
         heart.innerHTML = randomHeart;
         heart.className = 'heart';
         document.querySelector('.floating-elements').appendChild(heart);
@@ -207,29 +206,24 @@ function setupMusicPlayer() {
     const bgMusic = document.getElementById('bgMusic');
     const musicSource = document.getElementById('musicSource');
 
-    // Only show controls if music is enabled in config
     if (!config.music.enabled) {
         musicControls.style.display = 'none';
         return;
     }
 
-    // Set music source and volume
     musicSource.src = config.music.musicUrl;
     bgMusic.volume = config.music.volume || 0.5;
     bgMusic.load();
 
-    // Try autoplay if enabled
     if (config.music.autoplay) {
         const playPromise = bgMusic.play();
         if (playPromise !== undefined) {
-            playPromise.catch(error => {
-                console.log("Autoplay prevented by browser");
+            playPromise.catch(() => {
                 musicToggle.textContent = config.music.startText;
             });
         }
     }
 
-    // Toggle music on button click
     musicToggle.addEventListener('click', () => {
         if (bgMusic.paused) {
             bgMusic.play();
@@ -239,4 +233,4 @@ function setupMusicPlayer() {
             musicToggle.textContent = config.music.startText;
         }
     });
-} 
+}
