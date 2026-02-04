@@ -3,23 +3,15 @@
 // ============================================
 
 const CONFIG = {
-    // Your Valentine's name that will appear in the title
-    // Example: "Jade", "Sarah", "Mike"
     valentineName: "Leonie(BabyGirl)",
 
-    // The title that appears in the browser tab
-    // You can use emojis! 💝 💖 💗 💓 💞 💕
     pageTitle: "Will You Be My Valentine? 💝",
 
-    // Floating emojis that appear in the background
-    // Find more emojis at: https://emojipedia.org
     floatingEmojis: {
-        hearts: ['❤️', '💖', '💝', '💗', '💓'],  // Heart emojis
-        bears: ['🧸', '🐻']                       // Cute bear emojis
+        hearts: ['❤️', '💖', '💝', '💗', '💓'],
+        bears: ['🧸', '🐻']
     },
 
-    // Questions and answers
-    // Customize each question and its possible responses
     questions: {
         first: {
             text: "Do you like me?",
@@ -39,21 +31,18 @@ const CONFIG = {
         }
     },
 
-    // Love meter messages
     loveMessages: {
         extreme: "WOOOOW You love me that much?? 🥰🚀💝",
         high: "To infinity and beyond! 🚀💝",
         normal: "And beyond! 🥰"
     },
 
-    // Messages that appear after they say "Yes!"
     celebration: {
         title: "Yay! I'm the luckiest person in the world! 🎉💝💖💝💓",
         message: "Now come get your gift, a big warm hug and a huge kiss!",
         emojis: "🎁💖🤗💝💋❤️💕"
     },
 
-    // Color scheme for the website
     colors: {
         backgroundStart: "#ffafbd",
         backgroundEnd: "#ffc3a0",
@@ -62,7 +51,6 @@ const CONFIG = {
         textColor: "#ff4757"
     },
 
-    // Animation settings
     animations: {
         floatDuration: "15s",
         floatDistance: "50px",
@@ -70,7 +58,6 @@ const CONFIG = {
         heartExplosionSize: 1.5
     },
 
-    // Background Music (Optional)
     music: {
         enabled: true,
         autoplay: true,
@@ -81,5 +68,4 @@ const CONFIG = {
     }
 };
 
-// Don't modify anything below this line unless you know what you're doing
 window.VALENTINE_CONFIG = CONFIG;
